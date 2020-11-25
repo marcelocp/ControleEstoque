@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+html, body{
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #ffc2cd;
+}
+
+
+.app{
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  grid-template-rows: 10vh 87vh 3vh;
+  grid-template-areas: "h h "
+                       "m a "
+                       "f f";
+}
+
+nav {
+  grid-area: h;
+  background-color: #ff93ac;
+}
+main {
+  grid-area: m;
+  margin: 30px 60px;
+}
+
+aside{
+  grid-area: a;
+}
+footer{
+  grid-area: f;
+  color: black;
+  text-align: center;
+  background-color: #ff93ac;
+}
+
+img{
+  height: 600px;
+}
+
+legend{
+  color: darkmagenta;
+  font-family: 'Patrick Hand';
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+input{
+  text-align: center;
+}
+
+
+
+
+
+
+
+

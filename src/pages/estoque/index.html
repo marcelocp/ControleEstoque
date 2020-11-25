@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../styles/global.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>  <script src="../../scripts/sweetalert2.js"></script>
+  <script src="../../scripts/sweetalert2.js"></script>
+  <script src="script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+  <title>Cadastro de Produtos</title>
+</head>
+<body>
+  <div class="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" id="cadClientes"><a class="nav-link" href="../clientes/index.html" >CADASTRO CLIENTES</a></li>
+          <li class="nav-item" id="cadFornecedor"><a class="nav-link" href="../fornecedor/index.html" >CADASTRO FORNECEDOR</a></li>
+          <li class="nav-item" id="cadProdutos"><a class="nav-link" href="index.html" >CADASTRO ESTOQUE</a></li>
+          <li class="nav-item" id="cadVendas"><a class="nav-link" href="../vendas/index.html" >CADASTRO VENDAS</a></li>
+          <li class="nav-item" id="dash"><a class="nav-link" href="../dashboard/index.html" >DASHBOARD</a></li>
+        </ul>
+        <span class="navbar-text">
+          <a class="nav-link" href="../config/index.html" >CONFIGURAÇÃO</a>
+        </span>
+      </div>
+    </nav>
+    <main>
+      <form id="formProduct">
+        <legend>INCLUIR PRODUTO</legend>
+        <div class="row">
+          <div class="form-group col-3">
+            <label for="codigo">Código</label>
+            <input class="form-control" id="codigo" type="text" onblur="buscarProduto()" autofocus></input>
+            <br>
+          </div>
+          <div id="div-tipo" class="col-4">
+            <label>Selecione um Tipo</label>
+            <select class="custom-select" id="tipo">
+              <option value="" disabled selected>Selecione um tipo</option>
+              <option value="Calcinhas">Calcinhas</option>
+              <option value="Conjuntos">Conjuntos</option>
+              <option value="Pijamas">Pijamas</option>
+              <option value="Sutia">Sutiã</option>
+            </select>
+          </div>
+          <br>
+          <div id="div-fornecedor" class="form-group col-5">
+            <label>Fornecedor</label>
+            <select class="form-control" id="fornecedor" type="text">
+              <option value="" selected>Selecione um fornecedor</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <br>
+          <div id="div-desc" class="col-12">
+            <label for="descricao">Descrição do produto</label>
+            <textarea class="form-control" id="descricao" class="materialize-textarea"></textarea>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="form-group col-2">
+            <label for="valor-compra">Valor</label>
+            <input class="form-control" type="number" step="0.01" min="0.01" id="valor-compra">
+          </div>
+          <div class="form-group col-2">
+            <label for="quantidade">Quantidade</label>
+            <input class="form-control" id="quantidade" type="number" min="0" value="1">
+          </div>
+          <div class="form-group col-2">
+            <label for="desconto">Desc %</label>
+            <input class="form-control" id="desconto" type="Number">
+          </div>
+          <div class="form-group col-2">
+            <label for="lucro">Lucro %</label>
+            <input class="form-control" id="lucro" type="Number">
+          </div>
+          <div class="form-group col-4">
+            <label for="data-compra">Data Compra</label>
+            <input class="form-control" type="date" id="data-compra">
+          </div>
+        </div>
+        <br>
+        <a class="btn btn-outline-info" onclick="createProduct()">SALVAR</a>
+      </form>
+    </main>
+    <aside>
+      
+    </aside>
+    <footer>Desenvolvido por @MarceloCP </footer>
+  </div>
+</body>
+</html>
