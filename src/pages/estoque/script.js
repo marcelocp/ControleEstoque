@@ -74,7 +74,7 @@ function createProduct(){
       quantidade = Number(document.getElementById('quantidade').value)
       conn.query(`Select * from config where tipo='${tipo}'`, function (error, results, fields) {
        conn.query(`Insert into estoque (codigo, descricao, fornecedor, quantidade, valor_compra, valor_venda, config_id)
-        values ('${codigo}', '${descricao}', '${fornecedor}', ${valor_final}, ${valor_venda}, ${results[0].id})`)
+        values ('${codigo}', '${descricao}', '${fornecedor}', ${quantidade}, ${valor_final}, ${valor_venda}, ${results[0].id})`)
       })
    }
   })
