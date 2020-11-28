@@ -149,7 +149,7 @@ function produtosFornecedor(){
     var doc = new jsPDF();
     var valor = 0
     for(var i=0; i<results.length; i++){
-      valor += Number(results[i].valor_venda)
+      valor += Number(results[i].valor_venda)*Number(results[i].quantidade)
     }
     valor = valor.toFixed(2)
     doc.text(`Valor total em estoque (${results[0].nome}): R$ ${valor}`, 30, 10)
@@ -212,7 +212,7 @@ function produtosClientes(){
     var doc = new jsPDF();
     var valor = 0
     for(var i=0; i<results.length; i++){
-      valor += Number(results[i].valor_venda)
+      valor += Number(results[i].valor_venda)*Number(results[i].qdade)
     }
     valor = valor.toFixed(2)
     doc.text(`Valor total: ${valor}`, 30, 10)
@@ -229,7 +229,7 @@ function generateDataCli(amount, res){
     Valor: "",
   };
   for (var i = 0; i < amount; i += 1) {
-    data.Codigo = (res[i].produto_id).toString()
+    data.Codigo = (res[i].codigo).toString()
     data.Descricao = (res[i].descricao).toString()
     data.Valor = 'R$ '+ (res[i].valor_venda).toString()
     result.push(Object.assign({}, data));

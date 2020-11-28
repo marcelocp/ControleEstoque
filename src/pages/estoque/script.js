@@ -71,10 +71,10 @@ function createProduct(){
       conn.query(`Update estoque SET quantidade = ${quantidade}, valor_compra = ${valor_final}, 
                   valor_venda = ${valor_venda} where codigo='${codigo}'`)
     }else{
-      quantidade = Number(document.getElementById('quantidade').value)
+      console.log("Quantidade: "+quantidade)
       conn.query(`Select * from config where tipo='${tipo}'`, function (error, results, fields) {
-       conn.query(`Insert into estoque (codigo, descricao, fornecedor, quantidade, valor_compra, valor_venda, config_id)
-        values ('${codigo}', '${descricao}', '${fornecedor}', ${quantidade}, ${valor_final}, ${valor_venda}, ${results[0].id})`)
+        conn.query(`Insert into estoque (codigo, descricao, fornecedor, quantidade, valor_compra, valor_venda, config_id)
+          values ('${codigo}', '${descricao}', '${fornecedor}', ${quantidade}, ${valor_final}, ${valor_venda}, ${results[0].id})`)
       })
    }
   })
