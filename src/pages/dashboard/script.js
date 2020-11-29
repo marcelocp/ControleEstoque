@@ -201,7 +201,8 @@ function pesquisaProduto(){
         allowEscapeKey: false,
         allowEnterKey: false,	
         allowOutsideClick: false,
-        html: `<h4>Quantidade do Produto ${results[0].descricao}: <strong>${results[0].quantidade}</strong></h4>`,
+        html: `<h4>Quantidade do Produto ${results[0].descricao}: <strong>${results[0].quantidade}</strong></h4><br>
+               <h4>Valor: <strong>${results[0].valor_venda}</strong>`,
         icon: 'success'
       })
     }

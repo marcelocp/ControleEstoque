@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   })
 })
 
-function verificarEstoque(cod, qtdade, data, clienteId){
+function verificarEstoque(cod, qtdade, data, clienteId, desc){
   conn.query(`Select * from estoque where codigo = '${cod}'`, function (error, results, fields) {
     if(results.length > 0){
       if (results[0].quantidade >= qtdade){
         //Baixar estoque
         const novaQtdade = Number(results[0].quantidade - Number(qtdade))
         conn.query(`Update estoque Set quantidade = ${novaQtdade}  where codigo = '${cod}'`)
-        inserirVendas(results[0].valor_venda, results[0].id, data, qtdade, clienteId)
+        inserirVendas(results[0].valor_venda, results[0].id, data, qtdade, clienteId, desc)
       }else{
         Swal.fire({
           title: '<h3><strong>Atenção</strong></h3>',
@@ -51,8 +51,9 @@ function verificarEstoque(cod, qtdade, data, clienteId){
   })
 }
 
-function inserirVendas(valor, pId, dataVenda, qtdade, clienteId){
-  const valorFinal = Number(valor) * qtdade
+function inserirVendas(valor, pId, dataVenda, qtdade, clienteId, desc){
+  const descontoFinal = Number(valor)*desc/100
+  const valorFinal = (Number(valor) * qtdade)-descontoFinal
   conn.query(`Insert into venda (data_venda, valor_venda, cliente_id, produto_id, qdade)
     values ('${dataVenda}',${valorFinal},${clienteId},${pId}, ${qtdade})`)
   
@@ -62,11 +63,12 @@ function inserirVendas(valor, pId, dataVenda, qtdade, clienteId){
 }
 
 function createVendas(){
+  const desconto = document.getElementById('desconto').value
   const clienteId = document.getElementById('clients').value
   const dataVenda = document.getElementById('dataVenda').value
   const cod = document.getElementById('codigo').value
   const qtade = document.getElementById('quantidade').value
-  verificarEstoque(cod, qtade, dataVenda, clienteId)
+  verificarEstoque(cod, qtade, dataVenda, clienteId, desconto)
 
   Swal.fire({
     title: '<h3><strong>Sucesso</strong></h3>',
