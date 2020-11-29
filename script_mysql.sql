@@ -28,7 +28,8 @@ CREATE TABLE `caixa` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `data_operacao` date DEFAULT NULL,
   `tipo` varchar(255) DEFAULT NULL,
-  `valor` decimal(5,2) DEFAULT NULL,
+  `valor` decimal(8,2) DEFAULT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -84,8 +85,8 @@ CREATE TABLE `estoque` (
   `fornecedor` varchar(255) DEFAULT NULL,
   `imagem` longblob,
   `quantidade` int(11) DEFAULT NULL,
-  `valor_compra` decimal(5,2) DEFAULT NULL,
-  `valor_venda` decimal(5,2) DEFAULT NULL,
+  `valor_compra` decimal(8,2) DEFAULT NULL,
+  `valor_venda` decimal(8,2) DEFAULT NULL,
   `config_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKgy94m4yu5h0bi817jgmb2gete` (`config_id`),
@@ -119,7 +120,7 @@ CREATE TABLE `venda` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `data_venda` date DEFAULT NULL,
   `qdade` bigint(20) DEFAULT NULL,
-  `valor_venda` decimal(5,2) DEFAULT NULL,
+  `valor_venda` decimal(8,2) DEFAULT NULL,
   `cliente_id` bigint(20) DEFAULT NULL,
   `produto_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),

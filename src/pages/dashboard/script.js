@@ -12,37 +12,37 @@ function createHeaders(keys) {
       width: 65,
       align: "center"
      // padding: 0
-    });
+    }) 
   }
-  return result;
+  return result 
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
   conn.query('SELECT * from fornecedor order by nome ASC', function (error, results, fields) {
     const res = results
-    var comboForn = document.getElementById('fornecedor');
-    var opt = document.createElement("option");
+    var comboForn = document.getElementById('fornecedor') 
+    var opt = document.createElement("option") 
     var j = 0
-    for(var i=0; i<res.length; i++){
-			opt = document.createElement("option");
-			opt.value = res[i].id;
-			opt.text = res[i].nome;
-			fornecedor.add(opt, comboForn.options[j]);
-			j+= 1;
+    for(var i=0;  i<res.length; i++){
+			opt = document.createElement("option")
+			opt.value = res[i].id
+			opt.text = res[i].nome
+			fornecedor.add(opt, comboForn.options[j])
+			j+= 1
     } 
   })
 
   conn.query('SELECT * from cliente order by nome ASC', function (error, results, fields) {
     const res = results
-    var comboCli = document.getElementById('cliente');
-    var opt = document.createElement("option");
+    var comboCli = document.getElementById('cliente')
+    var opt = document.createElement("option")
     var k = 0
     for(var i=0; i<res.length; i++){
-			opt = document.createElement("option");
-			opt.value = res[i].id;
-			opt.text = res[i].nome;
-			cliente.add(opt, comboCli.options[k]);
-			k+= 1;
+			opt = document.createElement("option")
+			opt.value = res[i].id
+			opt.text = res[i].nome
+			cliente.add(opt, comboCli.options[k])
+			k+= 1
     } 
   })
 
@@ -63,12 +63,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
   conn.query('SELECT * from caixa', function (error, results, fields) {
     const res = results
     let venda = 0
+    let saidas = 0
+    let caixa = 0
     for(var i=0; i<res.length; i++){
       if(res[i].tipo === "ENTRADA"){
         venda += Number(res[i].valor)
+      }else{
+        saidas += Number(res[i].valor)
       }
     }
+    caixa = venda-saidas
     document.getElementById('vendas').innerHTML = venda.toFixed(2)
+    document.getElementById('saidas').innerHTML = saidas.toFixed(2)
+    document.getElementById('caixa').innerHTML = caixa.toFixed(2)
   })
 })
 
@@ -79,9 +86,9 @@ function listarPrecos(){
     "Valor",
   ]);
   conn.query('SELECT * from estoque', function (error, results, fields){
-    var doc = new jsPDF();
-    doc.table(30,10,generateData(results.length, results), headers, '');
-    doc.save("listaPreco.pdf");
+    var doc = new jsPDF()
+    doc.table(30,10,generateData(results.length, results), headers, '')
+    doc.save("listaPreco.pdf")
     window.open(doc.output('bloburl'))
   })
 }
@@ -96,9 +103,9 @@ function generateData(amount, res){
     data.Codigo = (res[i].codigo).toString()
     data.Descricao = (res[i].descricao).toString()
     data.Valor = 'R$ '+ (res[i].valor_venda).toString()
-    result.push(Object.assign({}, data));
+    result.push(Object.assign({}, data))
   }
-  return result;
+  return result
 };
 
 function produtosEstoque(){
@@ -110,14 +117,14 @@ function produtosEstoque(){
     "Quantidade",
   ],);
   conn.query('SELECT * from julingerie.estoque INNER JOIN fornecedor ON fornecedor.id = fornecedor where quantidade > 0 order by nome ASC', function (error, results, fields){
-    var doc = new jsPDF('p','pt', 'a4', true);
-    doc.table(50,10,generateDataEstoque(results.length, results), headers,  { autoSize:true });
-    doc.save("produtos.pdf");
+    var doc = new jsPDF('p','pt', 'a4', true)
+    doc.table(50,10,generateDataEstoque(results.length, results), headers,  { autoSize:true })
+    doc.save("produtos.pdf")
     window.open(doc.output('bloburl'))
   })
 }
 function generateDataEstoque(amount, res){
-  var result = [];
+  var result = []
   var data = {
     Fornecedor: "",
     Codigo: "",
@@ -131,9 +138,9 @@ function generateDataEstoque(amount, res){
     data.Descricao = (res[i].descricao).toString()
     data.Valor = 'R$ '+ (res[i].valor_venda).toString()
     data.Quantidade = (res[i].quantidade).toString()
-    result.push(Object.assign({}, data));
+    result.push(Object.assign({}, data))
   }
-  return result;
+  return result
 };
 
 
@@ -146,20 +153,20 @@ function produtosFornecedor(){
     "Quantidade",
   ]);
   conn.query(`SELECT * from estoque INNER JOIN fornecedor ON fornecedor.id = fornecedor  where fornecedor = ${fornecedor} and quantidade > 0`, function (error, results, fields){
-    var doc = new jsPDF();
+    var doc = new jsPDF()
     var valor = 0
     for(var i=0; i<results.length; i++){
       valor += Number(results[i].valor_venda)*Number(results[i].quantidade)
     }
     valor = valor.toFixed(2)
     doc.text(`Valor total em estoque (${results[0].nome}): R$ ${valor}`, 30, 10)
-    doc.table(10,20,generateDataFornecedor(results.length, results), headers, '');
-    doc.save("fornecedor.pdf");
+    doc.table(10,20,generateDataFornecedor(results.length, results), headers, '')
+    doc.save("fornecedor.pdf")
     window.open(doc.output('bloburl'))
   })
 }
 function generateDataFornecedor(amount, res){
-  var result = [];
+  var result = []
   var data = {
     Codigo: "",
     Descricao: "",
@@ -171,9 +178,9 @@ function generateDataFornecedor(amount, res){
     data.Descricao = (res[i].descricao).toString()
     data.Valor = 'R$ '+ (res[i].valor_venda).toString()
     data.Quantidade = (res[i].quantidade).toString()
-    result.push(Object.assign({}, data));
+    result.push(Object.assign({}, data))
   }
-  return result;
+  return result
 };
 
 function pesquisaProduto(){
@@ -209,20 +216,20 @@ function produtosClientes(){
     "Valor",
   ]);
   conn.query(`SELECT * from julingerie.venda INNER JOIN estoque ON estoque.id = produto_id  where cliente_id = '${codCli}'`, function (error, results, fields){
-    var doc = new jsPDF();
+    var doc = new jsPDF()
     var valor = 0
     for(var i=0; i<results.length; i++){
       valor += Number(results[i].valor_venda)*Number(results[i].qdade)
     }
     valor = valor.toFixed(2)
     doc.text(`Valor total: ${valor}`, 30, 10)
-    doc.table(30,30,generateDataCli(results.length, results), headers,'');
-    doc.save("cliente.pdf");
+    doc.table(30,30,generateDataCli(results.length, results), headers,'')
+    doc.save("cliente.pdf")
     window.open(doc.output('bloburl'))
   })
 }
 function generateDataCli(amount, res){
-  var result = [];
+  var result = []
   var data = {
     Codigo: "",
     Descricao: "",
@@ -232,7 +239,32 @@ function generateDataCli(amount, res){
     data.Codigo = (res[i].codigo).toString()
     data.Descricao = (res[i].descricao).toString()
     data.Valor = 'R$ '+ (res[i].valor_venda).toString()
-    result.push(Object.assign({}, data));
+    result.push(Object.assign({}, data))
   }
-  return result;
-};
+  return result
+}
+
+function fluxoCaixa(){
+  conn.query('SELECT * FROM caixa', function (error, results, fields){
+    let valorSaida = 0
+    let valorEntrada = 0
+    let valorCaixa = 0
+    results.forEach(res  => {
+      (res.tipo==='SAIDA') ? valorSaida += res.valor : valorEntrada += res.valor
+    })
+    valorSaida = valorSaida.toFixed(2)
+    valorEntrada = valorEntrada.toFixed(2)
+    valorCaixa = valorEntrada - valorSaida
+    valorCaixa = valorCaixa.toFixed(2)
+    Swal.fire({
+      title: '<h3><strong>Sucesso</strong></h3>',
+      allowEscapeKey: false,
+      allowEnterKey: false,	
+      allowOutsideClick: false,
+      html: `<h4>Valor em Entrada: <strong><h2>R$ ${valorEntrada}</h2></strong></h4><br>
+             <h4>Valor em Saída: <strong><h2>R$ ${valorSaida}</h2></strong></h4><br>
+             <h4>Valor em Caixa: <strong><h2>R$ ${valorCaixa}</h2></strong></h4>`,
+      icon: 'success'
+    })
+  })
+}

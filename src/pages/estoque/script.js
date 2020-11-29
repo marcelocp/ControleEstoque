@@ -79,11 +79,6 @@ function createProduct(){
    }
   })
   
-  //Caixa
-  const valor_final_compra = valor_final*quantidade
-  const dataCompra = document.getElementById('data-compra').value
-  conn.query(`Insert into caixa (data_operacao, tipo, valor) values ('${dataCompra}', 'SAIDA', ${valor_final_compra})`) 
-  
   Swal.fire({
     title: '<h3><strong>Sucesso</strong></h3>',
     allowEscapeKey: false,

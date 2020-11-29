@@ -12,7 +12,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
+  <title>Dashboard</title>  
 </head>
 <body>
   <div class="app">
@@ -26,13 +26,15 @@
           <li class="nav-item" id="dash"><a class="nav-link" href="index.html" >DASHBOARD</a></li>
         </ul>
         <span class="navbar-text">
-          <a class="nav-link" href="../config/index.html" >CONFIGURAÇÃO</a>
+          <a class="nav-link" href="../caixa/index.html" >SAÍDA CAIXA</a>
         </span>
       </div>
     </nav>
     <main>
       Quantidade de peças em estoque: <label style="color: blue;" id="pecas"></label><br>
       Valor de vendas: R$ <label style="color: blue;" id="vendas"></label><br>
+      Valor de saidas: R$ <label style="color: rgb(255, 0, 0);" id="saidas"></label><br>
+      Valor em caixa: R$ <label style="color: blue;" id="caixa"></label><br><br>
       Valor em estoque: R$ <label style="color: blue;" id="estoque"></label><br>
       <br>
       <label for="">Lista de Preço por Fornecedor</label>
@@ -51,17 +53,25 @@
       <br>
       <br>
       <div class="row">
-        <div class="form-group col-9">
-          Buscar quantidade por código produto
-          <input type="text" name="" style="width: 150px;" id="codId">
+        <div class="col-4">
+          <label class="label-control">Buscar quantidade por código</label> 
         </div>
-        <div class="form-group col-3">
+        <div class="form-group col-4">
+          <input class="form-control" type="text" id="codId">
+        </div>
+        <div class="form-group col-4">
           <button class="form-control btn btn-outline-info" onclick="pesquisaProduto()">Pesquisar</button>
         </div>
       </div>
       <br>
-      <button class="btn btn-outline-info" onclick="listarPrecos()">Lista Preços Geral</button>
-      <button class="btn btn-outline-info" onclick="produtosEstoque()">Produtos em Estoque</button>
+      <div class="row">
+        <div class="form-group col-6">
+          <button class="btn btn-outline-info form-control" onclick="listarPrecos()">Lista Preços Geral</button>
+        </div>
+        <div class="form-group col-6">
+          <button class="btn btn-outline-info form-control" onclick="produtosEstoque()">Produtos em Estoque</button>
+        </div>
+      </div>
     </main>
     <aside>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

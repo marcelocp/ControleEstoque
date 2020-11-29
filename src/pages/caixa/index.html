@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
-  <title>Cadastro de Clientes</title>
+  <title>Fluxo de Caixa</title>
 </head>
 <body>
   <div class="app">
@@ -28,33 +28,36 @@
           <li class="nav-item" id="dash"><a class="nav-link" href="../dashboard/index.html" >DASHBOARD</a></li>
         </ul>
         <span class="navbar-text">
-          <a class="nav-link" href="index.html" >CONFIGURAÇÃO</a>
+          <a class="nav-link" href="index.html" >SAÍDA CAIXA</a>
         </span>
       </div>
     </nav>
     <main>
       <form>
-        <legend>Configuração de Porcentagem de Lucro</legend>
+        <legend>Saidas do Caixa</legend>
           <div class="row">
-            <div class="form-group col-3">
-              <label for="calcinha">Calcinhas</label>
-              <input class="form-control" id="calcinha" type="text"></input>
+            <div style="text-align: center;" class="form-group col-4">
+              <label>Valor R$</label>
             </div>
-            <div class="form-group col-3">
-              <label for="conjunto">Conjuntos</label>
-              <input class="form-control" id="conjunto" type="text"></input>
+            <div style="text-align: center;" class="form-group col-4">
+              <label>Descrição</label>
+            </div>  
+            <div style="text-align: center;" class="form-group col-4">
+              <label>Data operação</label>
+            </div>    
+          </div>
+          <div class="row">
+            <div class="form-group col-4">
+              <input class="form-control" id="valor" type="number" min="0" step="0.01"></input>
             </div>
-            <div class="form-group col-3">
-              <label for="pijama">Pijamas</label>
-              <input class="form-control" id="pijama" type="text"></input>
+            <div class="form-group col-4">
+              <input class="form-control" id="desc" type="text"></input>
             </div>
-            <br>
-            <div class="form-group col-3">
-              <label>Sutiã</label>
-              <input class="form-control" id="sutia" type="text"></input>
+            <div class="form-group col-4">
+              <input class="form-control" id="data" type="date"></input>
             </div>
           </div>
-          <a class="btn btn-outline-info" onclick="updateType()">SALVAR</a>
+          <a class="btn btn-outline-info form-control" onclick="updateCaixa()">SALVAR</a>
       </form>
     </main>
     <aside>
