@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			j+= 1;
     } 
   })
-  
   document.getElementById('div-desc').style.display = 'none'
   document.getElementById('div-fornecedor').style.display = 'none'
   document.getElementById('div-tipo').style.display = 'none'
@@ -38,7 +37,8 @@ function buscarProduto(){
       conn.query(`Select * from config where id=${id}`, function (error, results, fields) {
         document.getElementById('tipo').text = results[0].tipo
       })
-      
+      document.getElementById('desconto').value = res[0].desconto
+      document.getElementById('lucro').value = res[0].lucro
       document.getElementById('descricao').value = res[0].descricao
       document.getElementById('fornecedor').value = res[0].fornecedor
       document.getElementById('valor-compra').value = res[0].valor_compra
@@ -68,13 +68,12 @@ function createProduct(){
     const res = results
     if(res.length > 0){
       quantidade = Number(quantidade) + Number(res[0].quantidade)
-      conn.query(`Update estoque SET quantidade = ${quantidade}, valor_compra = ${valor_final}, 
-                  valor_venda = ${valor_venda} where codigo='${codigo}'`)
+      conn.query(`Update estoque SET quantidade = ${quantidade}, valor_compra = ${valor_compra}, 
+                  valor_venda = ${valor_venda}, desconto = ${desconto}, lucro = ${lucro} where codigo='${codigo}'`)
     }else{
-      console.log("Quantidade: "+quantidade)
       conn.query(`Select * from config where tipo='${tipo}'`, function (error, results, fields) {
-        conn.query(`Insert into estoque (codigo, descricao, fornecedor, quantidade, valor_compra, valor_venda, config_id)
-          values ('${codigo}', '${descricao}', '${fornecedor}', ${quantidade}, ${valor_final}, ${valor_venda}, ${results[0].id})`)
+        conn.query(`Insert into estoque (codigo, descricao, fornecedor, quantidade, valor_compra, valor_venda, config_id, desconto, lucro)
+          values ('${codigo}', '${descricao}', '${fornecedor}', ${quantidade}, ${valor_compra}, ${valor_venda}, ${results[0].id}, ${desconto}, ${lucro})`)
       })
    }
   })

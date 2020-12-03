@@ -88,6 +88,8 @@ CREATE TABLE `estoque` (
   `valor_compra` decimal(8,2) DEFAULT NULL,
   `valor_venda` decimal(8,2) DEFAULT NULL,
   `config_id` bigint(20) DEFAULT NULL,
+  `desconto` int(11) DEFAULT NULL,
+  `lucro` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKgy94m4yu5h0bi817jgmb2gete` (`config_id`),
   CONSTRAINT `FKgy94m4yu5h0bi817jgmb2gete` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`)
